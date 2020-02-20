@@ -1,4 +1,4 @@
-
+package com.Filehandling;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +17,7 @@ class Accounts implements Serializable
     this.id = id;
     this.balance = balance;
     }
+
    public String getName() 
    {
 	   return name;
@@ -45,6 +46,7 @@ class Accounts implements Serializable
    {
 	return name+" "+id+" "+balance+" "; 
    }
+   
 	 
 }
 
@@ -55,23 +57,87 @@ public class Account {
 		}
 		return null;
 		}
-	public static void main(String[] args) throws IOException {
-		File file = new File("F:\\A.txt");
-		RandomAccessFile raf = new RandomAccessFile(file, "rw"); 
-		Accounts a=new Accounts("Name",123,2000);
-		raf.writeInt(a.getId());
-		raf.writeUTF(a.getName());
-		raf.writeDouble(a.getBalance());
-		System.out.println(a.toString());
-		long currentPosition = raf.getFilePointer(); 
-		raf.seek(0);
-		String name = raf.readUTF();
-		System.out.println(name);
-		int id = raf.readInt();
-		System.out.println(id);
-		double balance = raf.readDouble();
-		System.out.println(balance);
-		raf.close();
+		public static Accounts createAccount() throws Exception{
+			File file = new File("F:\\A.txt");
+			RandomAccessFile raf = new RandomAccessFile(file, "rw");
+			Accounts a=new Accounts("name",123,30000);
+			raf.writeInt(a.getId());
+			raf.writeUTF(a.getName());
+			raf.writeDouble(a.getBalance());
+			System.out.println("AccountOperation:  name=" + a.getName() + ", account no=" +a.getId()+", balance="+a.getBalance());
+			System.out.println("Account created.....");
+			raf.close();
+			return null;
+			}
+			public static  Accounts readAccount() throws Exception{
+			File file = new File("F:\\A.txt");
+			RandomAccessFile raf = new RandomAccessFile(file, "rw");
+			long currentPosition = raf.getFilePointer();
+			raf.seek(0);
+			System.out.println();
+			System.out.println("Reading created Account.....");
+			int id = raf.readInt();
+			System.out.println("AccountId= "+id);
+			String name = raf.readUTF();
+			System.out.println("Name= "+name);
+			double balance = raf.readDouble();
+			System.out.println("Balance = "+balance);
+			System.out.println();
+			raf.close();
+			return null;
+			}
+			public static  Accounts updateAccount() throws Exception{
+			File file = new File("F:\\A.txt");
+			RandomAccessFile raf = new RandomAccessFile(file, "rw");
+			Accounts a=new Accounts(null, 0, 0);
+			long currentPosition = raf.getFilePointer();
+			raf.seek(currentPosition++);
+			a.setId(1234);
+			raf.writeInt(a.getId());
+			a.setName("new");
+			raf.writeUTF(a.getName());
+			a.setBalance(122200.0);
+			raf.writeDouble(a.getBalance());
+			System.out.println(a.toString());
+			raf.close();
+			System.out.println();
+			System.out.println(" Account Upadted...!!");
+			return null;
+			}
+			public static  Accounts deleteAccount() throws Exception{
+			File file = new File("F:\\A.txt");
+			RandomAccessFile raf = new RandomAccessFile(file, "rw");
+			Accounts a=new Accounts(null, 0, 0);
+			long currentPosition = raf.getFilePointer();
+			raf.seek(0);
+			a.setId(0);
+			raf.writeInt(a.getId());
+			a.setName("ritika");
+			raf.writeUTF(a.getName());
+			a.setBalance(0.0);
+			raf.writeDouble(a.getBalance());
+			System.out.println(a.toString());
+			raf.close();
+			System.out.println();
+			System.out.println("Account deleted....");
+			raf.close();
+			return null;
+
+			}
+
+
+			public static void main(String[] args) throws Exception{
+			createAccount();
+			readAccount();
+			updateAccount();
+			readAccount();
+			deleteAccount();
+			readAccount();
+			System.out.println("completed");
+
+
+
+			
 
 	}
 
