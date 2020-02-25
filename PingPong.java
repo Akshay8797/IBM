@@ -4,8 +4,8 @@ public class PingPong implements Runnable {
 	Thread t1,t2;
 	public PingPong()
 	{
-		t1=new Thread(this);
-		t2=new Thread(this);
+		t1=new Thread(t1);
+		t2=new Thread(t1);
 		t1.setName("Ping");
 		t1.setName("Pong");
 		t1.start();
@@ -37,5 +37,4 @@ public class PingPong implements Runnable {
 		
 	}
 
-}
 }
