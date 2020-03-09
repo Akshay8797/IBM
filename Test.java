@@ -1,30 +1,10 @@
-package com.exceptions;
+package com.maven.project;
 
 public class Test {
-	public static void  main(String args[])
-	{
-		try {
-			int division = 10/5;
-			
-			   try {
-			       int ary[] = new int[5];
-			       ary[7] = 34;
-			       }
-			    catch(ArrayIndexOutOfBoundsException e) {
-			     e.printStackTrace();
-			      }
-			}
-			catch(ArithmeticException e) {
-			e.printStackTrace();
-			}
-		   finally
-		   {
-			   System.out.println("hello");
-		   }
-		System.out.println("hello this is yash");
-	    
-		
-		
+
+	public static void main(String[] args) {
+		System.out.println("USING JENKINS THIS MAVEN IS DONE");
+
 	}
 
 }
